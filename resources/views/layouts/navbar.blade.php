@@ -127,18 +127,18 @@
                     <div class="separator my-2"></div>
                     <!--end::Menu separator-->
                     <!--begin::Menu item-->
-                    <div class="menu-item px-5">
-                        <a href="../../demo2/dist/account/overview.html" class="menu-link px-5">My Profile</a>
-                    </div>
                     <div class="separator my-2"></div>
                     <div class="menu-item px-5 my-1">
-                        <a href="../../demo2/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
+                        <a href="" class="menu-link px-5">Account Settings</a>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-5">
-                        <a href="../../demo2/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign
-                            Out</a>
+                        <form action="{{ route('auth.signout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-danger mx-4">Sign
+                                Out</button>
+                        </form>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu separator-->

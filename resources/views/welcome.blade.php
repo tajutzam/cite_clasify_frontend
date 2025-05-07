@@ -17,47 +17,75 @@
             </div>
         </div>
     </section>
+    <section class="info-area section-gap">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content pb-40 col-lg-10">
+                    <div class="title text-center">
+                        <h1 class="mb-10">Klasifikasi Sumber Sitasi Jurnal</h1>
+                        <p>
+                            Kami membantu Anda dalam mengklasifikasikan sumber-sumber yang digunakan dalam jurnal Anda ke
+                            dalam tiga kelas utama, yaitu <strong>Background</strong>, <strong>Method</strong>, dan
+                            <strong>Result</strong>.
+                            Klasifikasi ini dilakukan secara otomatis menggunakan teknologi <i>Natural Language
+                                Processing</i> (NLP) dan pembelajaran mesin, untuk memberikan pemahaman yang lebih dalam
+                            terhadap kualitas referensi jurnal Anda.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="feature-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="single-feature">
-                        <div class="title">
+                        <div class="title" style="background-color: orange">
                             <h4>Background</h4>
                         </div>
                         <div class="desc-wrap">
                             <p>
-                                Kelas yang mengidentifikasi dasar teori dan referensi yang digunakan dalam penelitian.
+                                Kelas ini mengidentifikasi dasar teori dan referensi yang digunakan dalam penelitian.
+                                Biasanya ditempatkan pada <strong>bagian Pendahuluan (Introduction)</strong> dalam artikel
+                                atau jurnal ilmiah. Bagian ini memberikan konteks dan menjelaskan mengapa penelitian ini
+                                penting, serta menggambarkan penelitian sebelumnya yang relevan.
                             </p>
                             <a href="#">Pelajari Lebih Lanjut</a>
                         </div>
                     </div>
                 </div>
+
                 <!-- Method Section -->
                 <div class="col-lg-4">
                     <div class="single-feature">
-                        <div class="title">
+                        <div class="title" style="background-color: orange">
                             <h4>Method</h4>
                         </div>
                         <div class="desc-wrap">
                             <p>
-                                Kelas yang berisi metode dan pendekatan yang digunakan dalam penelitian, seperti
-                                eksperimen atau
-                                algoritma.
+                                Kelas ini berisi metode dan pendekatan yang digunakan dalam penelitian, seperti eksperimen
+                                atau algoritma. Biasanya ditempatkan pada <strong>bagian Metode (Methods)</strong> setelah
+                                bagian Pendahuluan. Bagian ini menjelaskan cara penelitian dilakukan, teknik yang digunakan,
+                                serta instrumen atau bahan yang dipakai.
                             </p>
                             <a href="#">Pelajari Lebih Lanjut</a>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="single-feature">
-                        <div class="title">
+                        <div class="title" style="background-color: orange">
                             <h4>Result</h4>
                         </div>
                         <div class="desc-wrap">
                             <p>
-                                Kelas yang Menampilkan hasil penelitian serta analisis dari eksperimen yang dilakukan.
+                                Kelas ini menampilkan hasil penelitian serta analisis dari eksperimen yang dilakukan.
+                                Biasanya ditempatkan pada <strong>bagian Hasil (Results)</strong>, setelah Metode. Bagian
+                                ini menyajikan data yang diperoleh dalam bentuk tabel, grafik, atau deskripsi, tanpa
+                                interpretasi mendalam, yang akan dibahas lebih lanjut di bagian Diskusi.
                             </p>
                             <a href="#">Pelajari Lebih Lanjut</a>
                         </div>
@@ -92,47 +120,24 @@
                 <div class="menu-content pb-70 col-lg-8">
                     <div class="title text-center">
                         <h1 class="mb-10">Journal Ranking (SJR)</h1>
-                        <p>Top journals based on SCImago Journal Rank (SJR).</p>
+                        <p>Top Journal Berdasarkan SCImago Journal Rank (SJR) Pada Penyimpanan Cite ClasifyS</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @php
-                    $journals = [
-                        [
-                            'title' => 'Journal of AI Research',
-                            'sjr' => 2.5,
-                            'description' => 'A top-tier journal in AI research.',
-                        ],
-                        [
-                            'title' => 'Machine Learning Review',
-                            'sjr' => 2.3,
-                            'description' => 'Covers latest trends in machine learning.',
-                        ],
-                        [
-                            'title' => 'Neural Networks & Deep Learning',
-                            'sjr' => 2.1,
-                            'description' => 'Focuses on neural networks advances.',
-                        ],
-                        [
-                            'title' => 'Data Science Journal',
-                            'sjr' => 1.9,
-                            'description' => 'Publishes innovative data science studies.',
-                        ],
-                    ];
-                @endphp
-
-                @foreach ($journals as $journal)
+                @foreach ($scopuses as $journal)
                     <div class="col-lg-3 col-md-6 single-journal">
-                        <div class="thumb">
-                            <img class="img-fluid" src="{{ asset('landing/img/journal-placeholder.jpg') }}" alt="">
+                        <div class="thumb d-flex justify-content-center align-items-center"
+                            style="height: 150px; background-color: #f8f9fa;">
+                            <i class="fa-solid fa-book"></i>
                         </div>
-                        <p class="meta">SJR Score: <strong>{{ $journal['sjr'] }}</strong></p>
-                        <h5>{{ $journal['title'] }}</h5>
-                        <p>{{ $journal['description'] }}</p>
-                        <a href="#" class="details-btn d-flex justify-content-center align-items-center">
-                            <span class="details">Details</span><span class="lnr lnr-arrow-right"></span>
-                        </a>
+
+                        <p class="meta">SJR Score: <strong>{{ $journal->sjr }}</strong></p>
+                        <h5>{{ $journal->title }}</h5>
+                        <a href="https://doi.org/{{ $journal->doi }}" target="_blank"
+                            class="details-btn d-flex justify-content-center align-items-center mt-2">
+                            <span class="details">Lihat Doi</span><span class="lnr lnr-arrow-right"></span>
+                            </href=>
                     </div>
                 @endforeach
             </div>

@@ -76,9 +76,9 @@
                         <!--begin::Header Logo-->
                         <div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
                             <a href="../../demo2/dist/index.html">
-                                <img alt="Logo" src="{{ asset('/') }}assets/media/logos/logo-demo2.png"
+                                <img alt="Logo" src="{{ asset('/') }}landing/img/logo_cite.png"
                                     class="logo-default h-25px" />
-                                <img alt="Logo" src="{{ asset('/') }}assets/media/logos/logo-demo2-sticky.png"
+                                <img alt="Logo" src="{{ asset('/') }}landing/img/logo_cite.png"
                                     class="logo-sticky h-25px" />
                             </a>
                         </div>

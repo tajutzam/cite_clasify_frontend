@@ -164,53 +164,74 @@
                     confirmButtonText: 'Ya, lanjutkan!',
                     cancelButtonText: 'Batal'
                 }).then((result) => {
+
                     if (result.isConfirmed) {
+                        const inputText = $('#text').val();
+                        const predictUrl = backendUrl + "/predict";
+                        const saveUrl = @json(route('save.result'));
+                        const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                        const labels = ["Background", "Method", "Result"];
+                        const descriptions = [
+                            "Kelas ini mengidentifikasi dasar teori dan referensi yang digunakan dalam penelitian. Biasanya ditempatkan pada bagian Pendahuluan (Introduction) dalam artikel atau jurnal ilmiah. Bagian ini memberikan konteks dan menjelaskan mengapa penelitian ini penting, serta menggambarkan penelitian sebelumnya yang relevan.",
+                            "Kelas ini berisi metode dan pendekatan yang digunakan dalam penelitian, seperti eksperimen atau algoritma. Biasanya ditempatkan pada bagian Metode (Methods) setelah bagian Pendahuluan. Bagian ini menjelaskan cara penelitian dilakukan, teknik yang digunakan, serta instrumen atau bahan yang dipakai.",
+                            "Kelas ini menampilkan hasil penelitian serta analisis dari eksperimen yang dilakukan. Biasanya ditempatkan pada bagian Hasil (Results), setelah Metode. Bagian ini menyajikan data yang diperoleh dalam bentuk tabel, grafik, atau deskripsi, tanpa interpretasi mendalam, yang akan dibahas lebih lanjut di bagian Diskusi."
+                        ];
+
+                        // 🔄 Tampilkan loading saat proses prediksi dimulai
+                        Swal.fire({
+                            title: 'Sedang memproses...',
+                            text: 'Mohon tunggu sementara sistem memproses prediksi.',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        // Kirim ke endpoint prediksi
                         $.ajax({
-                            url: backendUrl + "/predict",
+                            url: predictUrl,
                             method: 'POST',
                             contentType: 'application/json',
                             data: JSON.stringify({
-                                "text": $('#text').val()
+                                text: inputText
                             }),
                             success: function(response) {
-                                console.log(response);
+                                Swal.close();
 
-                                const labels = ["Background", "Method", "Result"];
                                 const predictionIndex = response.prediction;
                                 const predictionLabel = labels[predictionIndex];
-                                const probabilities = response.probability;
-                                const maxProbability = Math.max(...probabilities);
-                                const probabilityPercent = (maxProbability * 100).toFixed(2);
+                                const probability = Math.max(...response.probability);
+                                const probabilityPercent = (probability * 100).toFixed(2);
+                                const explanation = descriptions[predictionIndex];
 
                                 Swal.fire({
                                     title: 'Hasil Prediksi',
                                     html: `
-                            <strong>Label:</strong> ${predictionLabel}<br>
-                            <strong>Probabilitas:</strong> ${probabilityPercent}%
-                        `,
+                    <strong>Label:</strong> ${predictionLabel}<br>
+                    <strong>Probabilitas:</strong> ${probabilityPercent}%<br><br>
+                    <strong>Penjelasan:</strong> ${explanation}
+                `,
                                     icon: 'success',
                                     showCancelButton: true,
                                     confirmButtonText: 'Yes, Simpan',
                                     cancelButtonText: 'No, Jangan Simpan'
                                 }).then((simpan) => {
                                     if (simpan.isConfirmed) {
-                                        const url = @json(route('save.result'));
-
+                                        $('#text').val('');
                                         $.ajax({
-                                            url: url,
+                                            url: saveUrl,
                                             method: 'POST',
                                             headers: {
-                                                'X-CSRF-TOKEN': $(
-                                                        'meta[name="csrf-token"]')
-                                                    .attr('content')
+                                                'X-CSRF-TOKEN': csrfToken
                                             },
                                             contentType: 'application/json',
                                             data: JSON.stringify({
-                                                "text": $('#text').val(),
-                                                "prediction": predictionLabel,
-                                                "accuracy": maxProbability
+                                                text: inputText,
+                                                prediction: predictionLabel,
+                                                accuracy: probability
                                             }),
-                                            success: function(response) {
+                                            success: function() {
                                                 Swal.fire({
                                                     title: 'History Disimpan',
                                                     text: 'Hasil prediksi disimpan.',
@@ -230,6 +251,7 @@
                                             }
                                         });
                                     } else {
+                                        $('#text').val('');
                                         Swal.fire({
                                             title: 'History Tidak Disimpan',
                                             text: 'Hasil prediksi tidak disimpan.',
@@ -239,6 +261,7 @@
                                 });
                             },
                             error: function(xhr) {
+                                Swal.close(); // Tutup loading juga kalau gagal
                                 Swal.fire({
                                     title: 'Terjadi Kesalahan',
                                     text: xhr.responseText || 'Gagal melakukan prediksi',

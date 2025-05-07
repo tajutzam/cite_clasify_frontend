@@ -188,8 +188,23 @@
 @endif
 
 
-@stack('js')
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Terjadi Kesalahan!',
+            text: '{{ session('error') }}',
+            showConfirmButton: true
+        });
+    </script>
+@endif
 
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+
+
+
+@stack('js')
 
 <!--end::Javascript-->
 </body>

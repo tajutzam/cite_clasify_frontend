@@ -5,26 +5,6 @@
             <div class="row">
                 <div class="col-lg-4  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <img src="{{ asset('landing') }}/img/logo_cite.png" style="height: 50px" alt=""
-                            class="mb-3">
-                        <div class="" id="mc_embed_signup">
-                            <form target="_blank"
-                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="EMAIL"
-                                        placeholder="Enter Email Address" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter Email Address '" required=""
-                                        type="email">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">
-                                            <span class="lnr lnr-arrow-right"></span>
-                                        </button>
-                                    </div>
-                                    <div class="info"></div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

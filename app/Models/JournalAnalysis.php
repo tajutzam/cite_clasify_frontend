@@ -18,6 +18,11 @@ class JournalAnalysis extends Model
 
     public function scopus_references()
     {
-        return $this->hasMany(ScopusReference::class, "journal_analysis_id", "id");
+        return $this->hasMany(ScopusReference::class, "journal_analysis_id");
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 }
