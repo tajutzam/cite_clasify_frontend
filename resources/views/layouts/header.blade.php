@@ -34,16 +34,20 @@
         <div class="container main-menu">
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
-                    <a href="index.html">
-                        <img src="{{ asset('landing') }}/img/logo_cite.png" style="height: 20px" alt=""
-                            title="Logo" />
+                    <a href="{{ url('/') }}">
+                        <img src="{{ asset('landing') }}/img/logo_cite.png" style="height: 30px" alt="Logo" />
                     </a>
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                        <li><a href="{{ url('/', []) }}" style="margin-top: 10px">Home</a></li>
-                        <li><a href="{{ url('/journals') }}" style="margin-top: 10px">Journal Diunggah</a></li>
-                        <li><a href="{{ url('/login') }}" class="primary-btn rounded-md">Login</a></li>
+                        <li><a href="{{ url('/') }}" style="margin-top: 10px">Home</a></li>
+                        <li><a href="{{ route('login.google') }}"
+                                class="btn btn-flex flex-center btn-light btn-lg mt-1 text-dark">
+                                <img alt="Google Icon"
+                                    src="{{ asset('assets/media/svg/brand-logos/google-icon.svg') }}"
+                                    class="h-20px me-3" />
+                                Login or Register with Google
+                            </a></li>
                     </ul>
                 </nav>
             </div>

@@ -1,4 +1,8 @@
 <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+
+    @php
+        $isAdmin = Auth::user()->role == 'admin';
+    @endphp
     <!--begin::Navbar-->
     <div class="d-flex align-items-stretch gap-x-2" id="kt_header_nav">
         <!-- Menu Wrapper -->
@@ -23,34 +27,38 @@
                 </div>
 
                 <!-- User -->
-                <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.user.index') }}">
-                        <span
-                            class="menu-title {{ request()->routeIs('dashboard.user.index') ? 'text-gray-400' : '' }}">
-                            User
-                        </span>
-                    </a>
-                </div>
 
-                <!-- Dataset -->
-                <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.dataset.index') }}">
-                        <span
-                            class="menu-title {{ request()->routeIs('dashboard.dataset.index') ? 'text-gray-400' : '' }}">
-                            Data Uji
-                        </span>
-                    </a>
-                </div>
+                @if ($isAdmin)
+                    <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                        <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.user.index') }}">
+                            <span
+                                class="menu-title {{ request()->routeIs('dashboard.user.index') ? 'text-gray-400' : '' }}">
+                                User
+                            </span>
+                        </a>
+                    </div>
 
-                <!-- Uji Model -->
-                <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.uji_model.index') }}">
-                        <span
-                            class="menu-title {{ request()->routeIs('dashboard.uji_model.index') ? 'text-gray-400' : '' }}">
-                            History Uji Model
-                        </span>
-                    </a>
-                </div>
+                    <!-- Dataset -->
+                    <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                        <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.dataset.index') }}">
+                            <span
+                                class="menu-title {{ request()->routeIs('dashboard.dataset.index') ? 'text-gray-400' : '' }}">
+                                Data Uji
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Uji Model -->
+                    <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                        <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.uji_model.index') }}">
+                            <span
+                                class="menu-title {{ request()->routeIs('dashboard.uji_model.index') ? 'text-gray-400' : '' }}">
+                                History Uji Model
+                            </span>
+                        </a>
+                    </div>
+                @endif
+
                 <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.analysis.index') }}">
                         <span
@@ -129,7 +137,8 @@
                     <!--begin::Menu item-->
                     <div class="separator my-2"></div>
                     <div class="menu-item px-5 my-1">
-                        <a href="" class="menu-link px-5">Account Settings</a>
+                        <a href="{{ route('dashboard.profile', ['id' => 1]) }}" class="menu-link px-5">Account
+                            Settings</a>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->

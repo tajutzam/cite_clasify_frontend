@@ -1,4 +1,7 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 @section('content')
     <section class="banner-area relative" id="home">
         <div class="overlay overlay-bg"></div>
@@ -126,21 +129,26 @@
             </div>
             <div class="row">
                 @foreach ($scopuses as $journal)
-                    <div class="col-lg-3 col-md-6 single-journal">
+                    <div class="col-lg-3 col-md-6 single-journal mb-4">
                         <div class="thumb d-flex justify-content-center align-items-center"
                             style="height: 150px; background-color: #f8f9fa;">
                             <i class="fa-solid fa-book"></i>
                         </div>
 
                         <p class="meta">SJR Score: <strong>{{ $journal->sjr }}</strong></p>
-                        <h5>{{ $journal->title }}</h5>
-                        <a href="https://doi.org/{{ $journal->doi }}" target="_blank"
-                            class="details-btn d-flex justify-content-center align-items-center mt-2">
-                            <span class="details">Lihat Doi</span><span class="lnr lnr-arrow-right"></span>
-                            </href=>
+                        <h5 class="text-ellipsis text-truncate">{{ $journal->title }}</h5>
+
+                        @if (!empty($journal->doi))
+                            <a href="https://doi.org/{{ $journal->doi }}" target="_blank"
+                                class="details-btn d-flex justify-content-center align-items-center mt-2">
+                                <span class="details">Lihat Doi</span>
+                                <span class="lnr lnr-arrow-right"></span>
+                            </a>
+                        @endif
                     </div>
                 @endforeach
             </div>
+
         </div>
     </section>
 @endsection

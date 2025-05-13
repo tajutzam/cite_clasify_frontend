@@ -38,4 +38,24 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->to('/')->with('success', 'berhasil logout');
     }
+
+
+    public function loginPost(Request $request)
+    {
+
+        $validated = $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required'
+            ]
+        );
+
+        $isLogin = Auth::attempt($validated);
+        if ($isLogin) {
+            return redirect()->route('dashboard.index')->with('success', 'berhasil login!');
+        } else {
+            return redirect()->back()->with('error', 'Ops, harap check email atau password anda');
+        }
+    }
+
 }
