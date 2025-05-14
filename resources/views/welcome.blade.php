@@ -111,7 +111,7 @@
                         Pastikan jurnal Anda memiliki keseimbangan dalam ketiga aspek ini untuk meningkatkan
                         kualitasnya.
                     </p>
-                    <a class="primary-btn wh" href="#">Unggah Jurnal</a>
+                    <a class="primary-btn wh" href="/dashboard">Unggah Jurnal</a>
                 </div>
             </div>
         </div>

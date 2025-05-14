@@ -13,10 +13,10 @@ use App\Http\Middleware\IsAdminMiddleware;
 use App\Models\JournalAnalysis;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LandingController::class, "index"]);
+Route::get('/', [LandingController::class, "index"])->name('login');
 
 Route::post("/signout", [AuthController::class, 'logout'])->name('auth.signout');
-Route::get("/login", [AuthController::class, "login"])->name('login');
+// Route::get("/login", [AuthController::class, "login"])->name('login');
 Route::post("/login", [AuthController::class, "loginPost"])->name('login.post');
 
 
