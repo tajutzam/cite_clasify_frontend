@@ -15,7 +15,7 @@
                         Evaluasi kualitas jurnal berdasarkan pola sitasi dengan teknologi NLP dan machine learning.
                         Unggah jurnal Anda dan temukan wawasan mendalam dari sitasi yang terkandung di dalamnya.
                     </p>
-                    <a href="#" class="primary-btn text-uppercase">Mulai Sekarang</a>
+                    <a href="{{ route('login.google', ['id' => 1]) }}" class="primary-btn text-uppercase">Mulai Sekarang</a>
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
                         Pastikan jurnal Anda memiliki keseimbangan dalam ketiga aspek ini untuk meningkatkan
                         kualitasnya.
                     </p>
-                    <a class="primary-btn wh" href="/dashboard">Unggah Jurnal</a>
+                    <a class="primary-btn wh" href="{{ route('login.google', ['id' => 1]) }}">Unggah Jurnal</a>
                 </div>
             </div>
         </div>
