@@ -38,6 +38,11 @@
 
                 <div class="modal-body">
                     <div class="mb-0">
+                        <p>
+                            <strong>
+                                Jumlah Keseluruhan Data Test : 2021
+                            </strong>
+                        </p>
                         <label class="form-label">Pilih Persentase Data Test</label>
                         <div id="kt_slider_basic"></div>
 

@@ -12,17 +12,16 @@ class Dataset
 
     protected static $apiUrl = 'http://localhost:5000/get_data';
 
+
+    public $totalData = 0;
+
     public static function all()
     {
         try {
-            // Melakukan request GET ke API
             $response = Http::get(self::$apiUrl);
 
-            // Jika status code adalah 200 (sukses)
             if ($response->successful()) {
-                // Ambil data JSON dari response API
                 $data = $response->json();
-                // Konversi data menjadi array of object
                 return collect($data)->map(function ($item) {
                     return (object) $item;
                 });
@@ -50,10 +49,8 @@ class Dataset
                 $total = count($result); // Total data yang diterima
                 $offset = ($page - 1) * $perPage; // Hitung offset berdasarkan halaman
                 $data = array_slice($result, $offset, $perPage); // Ambil data berdasarkan offset dan perPage
-
                 // Hitung halaman terakhir
                 $lastPage = ceil($total / $perPage);
-
                 // Struktur data untuk pagination di Laravel
                 return [
                     'data' => $data, // Data yang diterima berdasarkan paginasi

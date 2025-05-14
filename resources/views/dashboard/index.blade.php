@@ -1,13 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    @php
+        $role = Auth::user()->role;
+    @endphp
+
     <div class="toolbar py-5 py-lg-15" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
             <div class="page-title d-flex flex-column me-3">
-                <h1 class="d-flex text-white fw-bolder my-1 fs-3">Dashboard</h1>
+                <h1 class="d-flex text-white fw-bold my-1 fs-2">Selamat Datang 👋</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <li class="breadcrumb-item text-white opacity-75">
-                        <a href="{{ route('dashboard.index', ['id' => 1]) }}" class="text-white text-hover-primary">Home</a>
+                        <a href="{{ route('dashboard.index', ['id' => 1]) }}" class="text-white text-hover-light">Home</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-white opacity-75 w-5px h-2px"></span>
@@ -17,83 +21,80 @@
             </div>
         </div>
     </div>
-
-    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-        <div class="content flex-row-fluid" id="kt_content">
-            <div class="row g-5 g-xxl-8">
-                @if (auth()->user()->role == 'admin')
-                    <div class="col-xxl-4 mb-4 mb-xxl-0">
-                        <div class="card card-xxl-stretch mb-xl-3 shadow-sm">
-                            <div class="card-header border-0 py-5">
-                                <h3 class="card-title align-items-start flex-column text-center">
-                                    <span class="card-label fw-bolder fs-4 mb-1 text-primary">Referensi Jurnal Scopus
-                                        Berdasarkan Tahun Publikasi</span>
+    @if ($role == 'admin')
+        <div id="kt_content_container" class="container-xxl py-10">
+            <div class="content flex-row-fluid" id="kt_content">
+                <div class="row g-5 g-xxl-8">
+                    <div class="col-xxl-12 mb-4">
+                        <div class="card card-xxl-stretch shadow-sm">
+                            <div class="card-header py-5 bg-light-primary">
+                                <h3 class="card-title text-primary fw-bolder fs-4 text-center w-100">
+                                    📊 Statistik Publikasi Jurnal per Tahun
                                 </h3>
                             </div>
-                            <div class="card-body d-flex flex-column">
-                                <div id="publicationYearChart" class="card-rounded-top" style="height: 200px"></div>
+                            <div class="card-body">
+                                <div id="publicationYearChart" style="height: 300px;"></div>
                             </div>
                         </div>
                     </div>
-                @endif
-
-                <div class="col-xxl-12">
-                    <div class="card card-xxl-stretch shadow-sm mb-4">
-                        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
-                            <div class="me-2">
-                                <h1 class="fw-bolder text-gray-800 mb-3">Selamat Datang di Website Klasifikasi Jurnal</h1>
-                                <h2 class="fw-bolder text-gray-800 mb-3">Klasifikasi Kalimat Ilmiah</h2>
-                                <div class="text-muted fw-bold fs-6">Analisis jurnalmu dengan bantuan Machine Learning
-                                    sekarang</div>
+                    <div class="col-xxl-4">
+                        <div class="card card-xxl-stretch shadow-sm mb-5">
+                            <div
+                                class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between">
+                                <div class="me-4 mb-4 mb-md-0">
+                                    <h2 class="fw-bold text-dark mb-2">Klasifikasi Kalimat Ilmiah</h2>
+                                    <p class="text-muted mb-0">Analisis jurnal kamu secara otomatis dengan bantuan Machine
+                                        Learning.</p>
+                                </div>
+                                <a href="{{ route('dashboard.analysis.index', ['id' => 1]) }}"
+                                    class="btn btn-sm btn-primary fw-bold">
+                                    Analisis
+                                </a>
                             </div>
-                            <a href="{{ route('dashboard.analysis.index', ['id' => 1]) }}"
-                                class="btn btn-primary fw-bold mt-2">Mulai Analisis</a>
                         </div>
                     </div>
-
-                    @if (auth()->user()->role == 'admin')
-                        <div class="row gx-5 gx-xl-8 mb-5 mb-xl-8">
-                            <div class="col-xxl-6 mb-3">
-                                <a href="#" class="card bg-primary card-xxl-stretch shadow-sm">
-                                    <div class="card-body text-center">
-                                        <img src="{{ asset('') }}assets/media/svg/user-tick.svg" alt=""
-                                            style="height: 40px; filter: invert(29%) sepia(95%) saturate(285%) hue-rotate(180deg);">
-                                        <div class="text-white fw-bolder fs-1 mb-2 mt-5">{{ $user }}</div>
-                                        <div class="fw-bold text-white fs-6">Total Pengguna</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xxl-6">
-                                <a href="#" class="card bg-light card-xxl-stretch shadow-sm">
-                                    <div class="card-body text-center">
-                                        <img src="{{ asset('') }}assets/media/svg/book-square.svg" alt=""
-                                            style="height: 40px">
-                                        <div class="text-gray-800 fw-bolder fs-1 mb-2 mt-5">{{ $journals }}</div>
-                                        <div class="fw-bold text-gray-800 fs-6">Total Jurnal</div>
-                                    </div>
-                                </a>
+                    <div class="col-xxl-4">
+                        <div class="card bg-primary shadow-sm text-white text-center py-4">
+                            <div class="card-body">
+                                <img src="{{ asset('assets/media/svg/user-tick.svg') }}" alt="User"
+                                    style="height: 40px;" class="mb-4">
+                                <h2 class="fw-bold fs-1">{{ $user }}</h2>
+                                <p class="fw-semibold fs-6">Total Pengguna</p>
                             </div>
                         </div>
-                    @endif
+                    </div>
+                    <div class="col-xxl-4">
+                        <div class="card bg-light shadow-sm text-center py-4">
+                            <div class="card-body">
+                                <img src="{{ asset('assets/media/svg/book-square.svg') }}" alt="Jurnal"
+                                    style="height: 40px;" class="mb-4">
+                                <h2 class="fw-bold text-dark fs-1">{{ $journals }}</h2>
+                                <p class="fw-semibold text-muted fs-6">Total Jurnal</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script>
-        function updateClock() {
-            let now = new Date();
-            let hours = now.getHours().toString().padStart(2, '0');
-            let minutes = now.getMinutes().toString().padStart(2, '0');
-            let seconds = now.getSeconds().toString().padStart(2, '0');
-            let formattedTime = `${hours}:${minutes}:${seconds}`;
-            document.getElementById('real-time-clock').textContent = formattedTime;
-        }
-
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
-
+    @else
+        <div id="kt_content_container" class="container-xxl py-10">
+            <div class="col-xxl-12">
+                <div class="card card-xxl-stretch shadow-sm mb-5">
+                    <div class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between">
+                        <div class="me-4 mb-4 mb-md-0">
+                            <h2 class="fw-bold text-dark mb-2">Klasifikasi Kalimat Ilmiah</h2>
+                            <p class="text-muted mb-0">Analisis jurnal kamu secara otomatis dengan bantuan Machine
+                                Learning.</p>
+                        </div>
+                        <a href="{{ route('dashboard.analysis.index', ['id' => 1]) }}"
+                            class="btn btn-sm btn-primary fw-bold">
+                            Analisis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     @push('js')
         <script>
             var publicationData = @json($publicationData);
@@ -108,7 +109,6 @@
                     toolbar: {
                         show: false
                     },
-                    background: '#f5f5f5'
                 },
                 series: [{
                     name: 'Jumlah Publikasi',
@@ -117,26 +117,41 @@
                 xaxis: {
                     categories: years,
                     title: {
-                        text: 'Tahun'
+                        text: 'Tahun',
+                        style: {
+                            fontWeight: 'bold'
+                        }
                     }
                 },
                 yaxis: {
                     title: {
-                        text: 'Jumlah'
+                        text: 'Jumlah Publikasi',
+                        style: {
+                            fontWeight: 'bold'
+                        }
                     }
                 },
-                colors: ['#50cd89'],
+                colors: ['#3f86ff'],
                 dataLabels: {
                     enabled: true
                 },
                 plotOptions: {
                     bar: {
-                        borderRadius: 8,
-                        horizontal: false
+                        borderRadius: 6,
+                        horizontal: false,
+                        columnWidth: '40%'
                     }
                 },
                 grid: {
-                    show: true
+                    borderColor: '#e7e7e7',
+                    strokeDashArray: 4
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val + " publikasi";
+                        }
+                    }
                 }
             };
 
