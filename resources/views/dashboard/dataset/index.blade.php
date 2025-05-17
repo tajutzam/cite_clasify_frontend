@@ -83,7 +83,7 @@
                                     @foreach ($dataset['data'] as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td class="text-start">{{ $item['clean_text_translated'] ?? '-' }}</td>
+                                            <td class="text-start">{{ $item['processed_text'] ?? '-' }}</td>
                                             <td>
                                                 @if ($item['label'] == 0)
                                                     <span class="badge bg-danger">{{ 'background' }}</span>
