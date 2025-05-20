@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3 class="mb-4">Hasil Pencarian Scopus</h3>
+        <h3 class="mb-4 text-white">Hasil Pencarian Scopus</h3>
 
         <form method="get" action="{{ route('dashboard.scopus.search') }}">
             <div class="input-group mb-4">
