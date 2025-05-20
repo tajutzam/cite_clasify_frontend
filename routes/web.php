@@ -7,6 +7,7 @@ use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\HistoryUjiController;
 use App\Http\Controllers\JournalAnalysisController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdminMiddleware;
@@ -38,6 +39,10 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(
         Route::get("analysis", [AnalysisController::class, "index"])->name('analysis.index');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/search', [AnalysisController::class, "searchScopus"])->name('scopus.search');
+        Route::post('/scopus/library', [AnalysisController::class, "store"])->name('scopus.library.store');
+        Route::get('/scopus/library', [LibraryController::class, "index"])->name('scopus.library.index');
+        Route::delete('/scopus/library/{id}' , [LibraryController::class , 'destroy'])->name('library.destroy');
 
     }
 );

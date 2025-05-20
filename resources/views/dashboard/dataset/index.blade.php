@@ -1,6 +1,5 @@
 @extends('layouts.dashboard')
 
-
 @section('content')
     <div class="toolbar py-5 py-lg-15" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
@@ -22,8 +21,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="modal fade" tabindex="-1" id="uji_model">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -62,9 +59,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <div class="content flex-row-fluid" id="kt_content">
             <div class="row g-5 g-xxl-8">
@@ -136,7 +130,6 @@
             </div>
         </div>
     </div>
-
     @push('js')
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -209,7 +202,7 @@
                                 focusCancel: true
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    Swal.close()
+                                    window.location.href = "/dashboard/uji_model";
                                 }
                             });
                         },
@@ -218,9 +211,6 @@
                             $('#result').html('Error: ' + error);
                         }
                     });
-
-
-
                 });
             });
         </script>

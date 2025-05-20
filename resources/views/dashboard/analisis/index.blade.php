@@ -33,6 +33,15 @@
                                 <label for="" class="">Kalimat Ilmiah</label>
                                 <textarea name="text" id="text" class="form-control"></textarea>
                             </div>
+                            <p>
+                                <i>
+                                    Contoh : Proses hakisan yang memilih akan menghasilkan butiran sedimen yang halus
+                                    berbanding hakisan yang tidak seragam akan menghasilkan butiran yang kasar [12,18].
+                                </i>
+                            </p>
+                            <p>
+                                <strong>Hanya Format APA Dan IEEE</strong>
+                            </p>
                             <button class="btn btn-primary btn-sm" id="">Prediksi</button>
                         </form>
                     </div>

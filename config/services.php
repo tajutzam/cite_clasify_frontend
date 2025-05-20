@@ -35,6 +35,11 @@ return [
         ],
     ],
 
+
+    'scopus' => [
+        'token' => env('TOKEN_SCOPUS', 'SET TOKEN SCOPUS MU!')
+    ],
+
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),

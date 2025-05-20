@@ -10,7 +10,7 @@ class Dataset
 {
     protected static $filePath = 'dataset/dataset.csv';
 
-    protected static $apiUrl = 'http://api.tajoki.my.id/get_data';
+    protected static $apiUrl = 'http://localhost:5000/get_data';
 
 
     public $totalData = 0;

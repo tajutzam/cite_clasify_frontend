@@ -75,6 +75,22 @@
                         </span>
                     </a>
                 </div>
+                <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                    <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.scopus.search') }}">
+                        <span
+                            class="menu-title {{ request()->routeIs('dashboard.scopus.search') ? 'text-gray-400' : '' }}">
+                            Cari Referensi Scopus
+                        </span>
+                    </a>
+                </div>
+                <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                    <a class="menu-link py-3 text-gray-600" href="{{ route('dashboard.scopus.library.index') }}">
+                        <span
+                            class="menu-title {{ request()->routeIs('dashboard.scopus.library.index') ? 'text-gray-400' : '' }}">
+                            Daftar Di simpan
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
