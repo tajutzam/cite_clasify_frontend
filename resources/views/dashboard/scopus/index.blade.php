@@ -15,10 +15,13 @@
         @if ($keyword)
             <p class="mb-3 text-white">
                 Menampilkan hasil pencarian untuk kata kunci: <strong>{{ $keyword }}</strong>.
-                @if($results->total() > 0)
+                @if ($results->total() > 0)
                     Total hasil ditemukan: <strong>{{ $results->total() }}</strong>.
                 @else
-                    Tidak ada hasil yang ditemukan.
+                    @if (request('keyword'))
+                        Tidak ada hasil yang ditemukan.
+                    @else
+                    @endif
                 @endif
             </p>
         @else
